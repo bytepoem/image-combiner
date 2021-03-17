@@ -248,4 +248,9 @@ The MIT-996 License (MIT)
 
 Copyright (c) 2020 Zhaoqing Chen
 
+### Gitee上的Star趋势图
+
+[![Giteye chart](https://chart.giteye.net/gitee/dromara/image-combiner/MET6YZ8J.png)](https://giteye.net/chart/MET6YZ8J)
+
+
 
