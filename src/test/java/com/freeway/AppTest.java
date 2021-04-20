@@ -84,7 +84,7 @@ public class AppTest {
                 .setAutoBreakLine(837, 2, 60);
 
         //头像（圆角设置一定的大小，可以把头像变成圆的）
-        combiner.addImageElement(avatar, 200, 1200,130,130,ZoomMode.WidthHeight)
+        combiner.addImageElement(avatar, 200, 1200, 130, 130, ZoomMode.WidthHeight)
                 .setRoundCorner(200)
                 .setBlur(5);       //高斯模糊，毛玻璃效果
 
@@ -206,7 +206,7 @@ public class AppTest {
         String content = "2021-12-12 到期";
 
         //如背景包含透明部分，一定要用OutputFormat.PNG格式，否则合成后透明部分会变黑
-        ImageCombiner combiner = new ImageCombiner(bgImage, OutputFormat.PNG);
+        ImageCombiner combiner = new ImageCombiner(bgImage, 1000, 0, ZoomMode.Height, OutputFormat.PNG);
 
         //内容文本
         combiner.addTextElement(content, 38, 72, 260).setColor(Color.white);

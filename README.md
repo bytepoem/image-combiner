@@ -32,11 +32,11 @@ ImageCombiner使用起来相当简单，主要的类只用一个，new一个Imag
 <dependency>
     <groupId>com.freeway</groupId>
     <artifactId>image-combiner</artifactId>
-    <version>1.1.3</version>
+    <version>1.1.4</version>
 </dependency>
 ```
 
-最新版本为<font color=red>1.1.3</font>，目前还没有上传中央仓库（比较麻烦），请先自行deploy到自己的私库
+最新版本为<font color=red>1.1.4</font>，目前还没有上传中央仓库（比较麻烦），请先自行deploy到自己的私库
 
 ## 2.2 最简单的例子
 ```java
@@ -76,7 +76,7 @@ public void demo() throws Exception {
     String content = "苏格拉底说：“如果没有那个桌子，可能就没有那个水壶”";  //内容文本
 
     //创建合成器（指定背景图和输出格式，整个图片的宽高和相关计算依赖于背景图，所以背景图的大小是个基准）
-    ImageCombiner combiner = new ImageCombiner(bgImageUrl, OutputFormat.JPG);
+    ImageCombiner combiner = new ImageCombiner(bgImageUrl, 1500, 0, ZoomMode.Height OutputFormat.JPG);  //v1.1.4之后可以指定背景图新宽高了（不指定则默认用图片原宽高）
     //设置背景高斯模糊（毛玻璃效果）
     combiner.setBackgroundBlur(30);
     
@@ -234,6 +234,9 @@ v1.1.2
 v1.1.3 
 * 修复背景图为png时，合成后背景图透明部分变黑的问题
 * 整理了下测试方法 
+
+v1.1.4 
+* ImageCombiner合成器对象新增两个构造函数，可以指定背景图的新宽高
 
 # 三. 联系作者
 

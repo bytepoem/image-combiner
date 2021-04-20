@@ -31,6 +31,7 @@ public class ImageCombiner {
     /**
      * @param bgImageUrl   背景图片地址（画布以背景图宽高为基准）
      * @param outputFormat 输出图片格式
+     * @throws Exception
      */
     public ImageCombiner(String bgImageUrl, OutputFormat outputFormat) throws Exception {
         ImageElement bgImageElement = new ImageElement(bgImageUrl, 0, 0);
@@ -43,12 +44,46 @@ public class ImageCombiner {
     /**
      * @param bgImage      背景图片对象（画布以背景图宽高为基准）
      * @param outputFormat 输出图片格式
+     * @throws Exception
      */
     public ImageCombiner(BufferedImage bgImage, OutputFormat outputFormat) throws Exception {
         ImageElement bgImageElement = new ImageElement(bgImage, 0, 0);
         this.combineElements.add(bgImageElement);
         this.canvasWidth = bgImage.getWidth();
         this.canvasHeight = bgImage.getHeight();
+        this.outputFormat = outputFormat;
+    }
+
+    /**
+     * @param bgImageUrl   背景图片地址
+     * @param width        背景图宽度
+     * @param height       背景图高度
+     * @param zoomMode     缩放模式
+     * @param outputFormat 输出图片格式
+     * @throws Exception
+     */
+    public ImageCombiner(String bgImageUrl, int width, int height, ZoomMode zoomMode, OutputFormat outputFormat) throws Exception {
+        ImageElement bgImageElement = new ImageElement(bgImageUrl, 0, 0, width, height, zoomMode);
+        this.combineElements.add(bgImageElement);
+        this.canvasWidth = width;
+        this.canvasHeight = height;
+        this.outputFormat = outputFormat;
+    }
+
+
+    /**
+     * @param bgImage      背景图片对象
+     * @param width        背景图宽度
+     * @param height       背景图高度
+     * @param zoomMode     缩放模式
+     * @param outputFormat 输出图片格式
+     * @throws Exception
+     */
+    public ImageCombiner(BufferedImage bgImage, int width, int height, ZoomMode zoomMode, OutputFormat outputFormat) throws Exception {
+        ImageElement bgImageElement = new ImageElement(bgImage, 0, 0, width, height, zoomMode);
+        this.combineElements.add(bgImageElement);
+        this.canvasWidth = width;
+        this.canvasHeight = height;
         this.outputFormat = outputFormat;
     }
 
@@ -63,7 +98,7 @@ public class ImageCombiner {
         Graphics2D g = combinedImage.createGraphics();
 
         //PNG要做透明度处理，否则背景图透明部分会变黑
-        if(outputFormat == OutputFormat.PNG) {
+        if (outputFormat == OutputFormat.PNG) {
             combinedImage = g.getDeviceConfiguration().createCompatibleImage(canvasWidth, canvasHeight, Transparency.TRANSLUCENT);
             g = combinedImage.createGraphics();
         }
@@ -94,6 +129,7 @@ public class ImageCombiner {
 
     /**
      * 计算文本宽度（常用于确定后续元素的x坐标，如跟在原价后面的打折价，原价位数不定，需动态计算总宽度）
+     *
      * @param textElement
      * @return
      */
@@ -149,10 +185,11 @@ public class ImageCombiner {
 
     /**
      * 设置背景高斯模糊（毛玻璃效果）
+     *
      * @return
      */
-    public void setBackgroundBlur(int blur){
-        ImageElement bgElement = (ImageElement)combineElements.get(0);
+    public void setBackgroundBlur(int blur) {
+        ImageElement bgElement = (ImageElement) combineElements.get(0);
         bgElement.setBlur(blur);
     }
 
