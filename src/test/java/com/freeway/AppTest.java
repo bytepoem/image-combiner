@@ -34,12 +34,12 @@ public class AppTest {
         ImageCombiner combiner = new ImageCombiner("https://img.thebeastshop.com/apppictures/2021-06-04/b518478c5f22cd6745e16d8fb32a5601.jpg@0o_0l_750w_90q.jpg", OutputFormat.JPG);
 
         //加图片元素（居中绘制，圆角，半透明）
-        //combiner.addImageElement("https://img.thebeastshop.com/image/20201130115835493501.png?x-oss-process=image/resize,m_pad,w_750,h_783/auto-orient,1/quality,q_90/format,jpg", 0, 300)
-        //        .setCenter(true);
+        combiner.addImageElement("https://img.thebeastshop.com/image/20201130115835493501.png?x-oss-process=image/resize,m_pad,w_750,h_783/auto-orient,1/quality,q_90/format,jpg", 0, 300)
+                .setCenter(true);
 
         //加文本元素
-        //combiner.addTextElement("周末大放送", 60, 100, 960)
-       //         .setColor(Color.red);
+        combiner.addTextElement("周末大放送", 60, 100, 960)
+                .setColor(Color.red);
 
         //合成图片
         combiner.combine();
