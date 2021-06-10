@@ -32,11 +32,11 @@ ImageCombiner使用起来相当简单，主要的类只用一个，new一个Imag
 <dependency>
     <groupId>com.freeway</groupId>
     <artifactId>image-combiner</artifactId>
-    <version>1.1.4</version>
+    <version>1.1.5</version>
 </dependency>
 ```
 
-最新版本为<font color=red>1.1.4</font>，目前还没有上传中央仓库（比较麻烦），请先自行deploy到自己的私库
+最新版本为<font color=red>1.1.5</font>，目前还没有上传中央仓库（比较麻烦），请先自行deploy到自己的私库
 
 ## 2.2 最简单的例子
 ```java
@@ -217,26 +217,29 @@ public void dynamicWidthDemoTest() throws Exception {
 作者日常需求中已经够用了，各位小伙伴如果有额外的需求可以考虑再进一步扩充，如增加旋转、毛玻璃、艺术字等特效，欢迎加群交流
 
 ## 2.8 更新日志
-v1.0.0  
+v1.0.0
 * 基本功能完善
 
-v1.1.0  
+v1.1.0
 * 修复一些小bug
 * 开放文本宽度、高度计算等方法，方便外部动态计算元素位置
 * 文本和图片元素支持旋转
 
-v1.1.1  
+v1.1.1
 * 背景和图片元素支持高斯模糊（毛玻璃效果）
 
-v1.1.2  
+v1.1.2
 * 修复一个ImageElement构造函数bug
 
-v1.1.3 
+v1.1.3
 * 修复背景图为png时，合成后背景图透明部分变黑的问题
 * 整理了下测试方法 
 
-v1.1.4 
+v1.1.4
 * ImageCombiner合成器对象新增两个构造函数，可以指定背景图的新宽高
+
+v1.1.5 
+* 修复设置背景图宽高构造函数的小bug
 
 # 三. 联系作者
 

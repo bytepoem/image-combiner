@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +35,7 @@ public class ImageCombiner {
      * @throws Exception
      */
     public ImageCombiner(String bgImageUrl, OutputFormat outputFormat) throws Exception {
-        ImageElement bgImageElement = new ImageElement(bgImageUrl, 0, 0);
-        this.combineElements.add(bgImageElement);
-        this.canvasWidth = bgImageElement.getImage().getWidth();
-        this.canvasHeight = bgImageElement.getImage().getHeight();
-        this.outputFormat = outputFormat;
+        this(ImageIO.read(new URL(bgImageUrl)), outputFormat);
     }
 
     /**
@@ -46,7 +43,7 @@ public class ImageCombiner {
      * @param outputFormat 输出图片格式
      * @throws Exception
      */
-    public ImageCombiner(BufferedImage bgImage, OutputFormat outputFormat) throws Exception {
+    public ImageCombiner(BufferedImage bgImage, OutputFormat outputFormat) {
         ImageElement bgImageElement = new ImageElement(bgImage, 0, 0);
         this.combineElements.add(bgImageElement);
         this.canvasWidth = bgImage.getWidth();
@@ -63,13 +60,8 @@ public class ImageCombiner {
      * @throws Exception
      */
     public ImageCombiner(String bgImageUrl, int width, int height, ZoomMode zoomMode, OutputFormat outputFormat) throws Exception {
-        ImageElement bgImageElement = new ImageElement(bgImageUrl, 0, 0, width, height, zoomMode);
-        this.combineElements.add(bgImageElement);
-        this.canvasWidth = width;
-        this.canvasHeight = height;
-        this.outputFormat = outputFormat;
+        this(ImageIO.read(new URL(bgImageUrl)), width, height, zoomMode, outputFormat);
     }
-
 
     /**
      * @param bgImage      背景图片对象
@@ -77,13 +69,36 @@ public class ImageCombiner {
      * @param height       背景图高度
      * @param zoomMode     缩放模式
      * @param outputFormat 输出图片格式
-     * @throws Exception
      */
-    public ImageCombiner(BufferedImage bgImage, int width, int height, ZoomMode zoomMode, OutputFormat outputFormat) throws Exception {
+    public ImageCombiner(BufferedImage bgImage, int width, int height, ZoomMode zoomMode, OutputFormat outputFormat) {
         ImageElement bgImageElement = new ImageElement(bgImage, 0, 0, width, height, zoomMode);
+
+        //计算画布新宽高
+        int canvasWidth = 0;
+        int canvasHeight = 0;
+
+        switch (zoomMode) {
+            case Origin:
+                canvasWidth = bgImage.getWidth();
+                canvasHeight = bgImage.getHeight();
+                break;
+            case Width:
+                canvasWidth = width;
+                canvasHeight = bgImage.getHeight() * canvasWidth / bgImage.getWidth();
+                break;
+            case Height:
+                canvasHeight = height;
+                canvasWidth = bgImage.getWidth() * canvasHeight / bgImage.getHeight();
+                break;
+            case WidthHeight:
+                canvasHeight = width;
+                canvasWidth = height;
+                break;
+        }
+
         this.combineElements.add(bgImageElement);
-        this.canvasWidth = width;
-        this.canvasHeight = height;
+        this.canvasWidth = canvasWidth;
+        this.canvasHeight = canvasHeight;
         this.outputFormat = outputFormat;
     }
 
@@ -224,7 +239,7 @@ public class ImageCombiner {
      * @param y     y坐标
      * @return
      */
-    public ImageElement addImageElement(BufferedImage image, int x, int y) throws Exception {
+    public ImageElement addImageElement(BufferedImage image, int x, int y) {
         ImageElement imageElement = new ImageElement(image, x, y);
         this.combineElements.add(imageElement);
         return imageElement;

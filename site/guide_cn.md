@@ -32,11 +32,11 @@ ImageCombiner使用起来相当简单，主要的类只用一个，new一个Imag
 <dependency>
     <groupId>com.freeway</groupId>
     <artifactId>image-combiner</artifactId>
-    <version>1.1.4</version>
+    <version>1.1.5</version>
 </dependency>
 ```
 
-最新版本为<font color=red>1.1.4</font>，目前还没有上传中央仓库（比较麻烦），请先自行deploy到自己的私库
+最新版本为<font color=red>1.1.5</font>，目前还没有上传中央仓库（比较麻烦），请先自行deploy到自己的私库
 
 ## 2.2 最简单的例子
 ```java
@@ -238,6 +238,9 @@ v1.1.3
 
 v1.1.4 
 * ImageCombiner合成器对象新增两个构造函数，可以指定背景图的新宽高
+
+v1.1.5 
+* 修复设置背景图宽高构造函数的小bug
 
 # 三. 联系作者
 

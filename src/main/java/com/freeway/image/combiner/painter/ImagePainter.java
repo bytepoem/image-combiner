@@ -107,7 +107,7 @@ public class ImagePainter implements IPainter {
      * @param radius
      * @return
      */
-    public static BufferedImage makeBlur(BufferedImage srcImage, int radius) {
+    private BufferedImage makeBlur(BufferedImage srcImage, int radius) {
 
         if (radius < 1) {
             return srcImage;

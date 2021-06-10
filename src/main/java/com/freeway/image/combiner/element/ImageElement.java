@@ -43,10 +43,10 @@ public class ImageElement extends CombineElement<ImageElement> {
      * @param x     x坐标
      * @param y     y坐标
      */
-    public ImageElement(BufferedImage image, int x, int y) throws Exception {
+    public ImageElement(BufferedImage image, int x, int y) {
         this.image = image;
-        this.width = getImage().getWidth();
-        this.height = getImage().getHeight();
+        this.width = image.getWidth();
+        this.height = image.getHeight();
         this.zoomMode = ZoomMode.Origin;
         super.setX(x);
         super.setY(y);
