@@ -31,7 +31,7 @@ public class AppTest {
     public void simpleTest() throws Exception {
 
         //合成器和背景图（整个图片的宽高和相关计算依赖于背景图，所以背景图的大小是个基准）
-        ImageCombiner combiner = new ImageCombiner("https://img.thebeastshop.com/apppictures/2021-06-04/b518478c5f22cd6745e16d8fb32a5601.jpg@0o_0l_750w_90q.jpg", OutputFormat.JPG);
+        ImageCombiner combiner = new ImageCombiner("https://img.thebeastshop.com/combine_image/funny_topic/resource/bg_3x4.png", OutputFormat.JPG);
 
         //加图片元素（居中绘制，圆角，半透明）
         combiner.addImageElement("https://img.thebeastshop.com/image/20201130115835493501.png?x-oss-process=image/resize,m_pad,w_750,h_783/auto-orient,1/quality,q_90/format,jpg", 0, 300)
