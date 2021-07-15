@@ -45,11 +45,11 @@ public void simpleDemo() throws Exception {
     //合成器（指定背景图和输出格式，整个图片的宽高和相关计算依赖于背景图，所以背景图的大小是个基准）
     ImageCombiner combiner = new ImageCombiner("http://xxx.com/image/bg.jpg", OutputFormat.JPG);
 
-    //加图片元素
+    //加图片元素（注意：坐标以图片元素的左上角为定位点）
     combiner.addImageElement("http://xxx.com/image/product.png", 0, 300);
 
-    //加文本元素
-    combiner.addTextElement("周末大放送", 60, 100, 960);
+    //加文本元素（注意：坐标以文本元素的左下角为定位点，左下！和图片不一样！）
+    combiner.addTextElement("周末大放送", 60, 100, 960);     //这里的（100, 960）是“周”字的左下角坐标
 
     //执行图片合并
     combiner.combine();
@@ -76,7 +76,7 @@ public void demo() throws Exception {
     String content = "苏格拉底说：“如果没有那个桌子，可能就没有那个水壶”";  //内容文本
 
     //创建合成器（指定背景图和输出格式，整个图片的宽高和相关计算依赖于背景图，所以背景图的大小是个基准）
-    ImageCombiner combiner = new ImageCombiner(bgImageUrl, 1500, 0, ZoomMode.Height OutputFormat.JPG);  //v1.1.4之后可以指定背景图新宽高了（不指定则默认用图片原宽高）
+    ImageCombiner combiner = new ImageCombiner(bgImageUrl, 1500, 0, ZoomMode.Height, OutputFormat.JPG);  //v1.1.4之后可以指定背景图新宽高了（不指定则默认用图片原宽高）
     //设置背景高斯模糊（毛玻璃效果）
     combiner.setBackgroundBlur(30);
     
@@ -105,7 +105,7 @@ public void demo() throws Exception {
     combiner.addImageElement(waterMark, 630, 1200)
             .setAlpha(.8f);         //透明度（0.0~1.0）
             .setRotate(45);         //旋转（0~360）
-            .setBlur(20);           //高斯模糊(1~100)_
+            .setBlur(20);           //高斯模糊(1~100)
 
     //二维码（强制按指定宽度、高度缩放）
     combiner.addImageElement(qrCodeUrl, 138, 1707, 186, 186, ZoomMode.WidthHeight);
