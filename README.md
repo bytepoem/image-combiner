@@ -49,7 +49,7 @@ public void simpleDemo() throws Exception {
     combiner.addImageElement("http://xxx.com/image/product.png", 0, 300);
 
     //加文本元素（注意：坐标以文本元素的左下角为定位点，左下！和图片不一样！）
-    combiner.addTextElement("周末大放送", 60, 100, 960);     //这里的（100, 960）是“周”字的左下角坐标
+    combiner.addTextElement("周末大放送", 60, 100, 960);     //这里的(100, 960)是指“周”字的左下角坐标
 
     //执行图片合并
     combiner.combine();
