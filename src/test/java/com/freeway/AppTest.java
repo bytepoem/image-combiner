@@ -246,6 +246,12 @@ public class AppTest {
                 .setColor(Color.BLUE);
 
         //加入矩形元素（圆角）
+        combiner.addRectangleElement(300, 700, 300, 300)
+                .setColor(Color.YELLOW)
+                .setRoundCorner(100)
+                .setAlpha(.8f);
+
+        //加入矩形元素（圆）
         combiner.addRectangleElement(200, 500, 300, 300)
                 .setColor(Color.RED)
                 .setRoundCorner(300)        //该值大于等于宽高时，就是圆形
