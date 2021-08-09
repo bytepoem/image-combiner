@@ -2,6 +2,7 @@ package com.freeway.image.combiner;
 
 import com.freeway.image.combiner.element.CombineElement;
 import com.freeway.image.combiner.element.ImageElement;
+import com.freeway.image.combiner.element.RectangleElement;
 import com.freeway.image.combiner.element.TextElement;
 import com.freeway.image.combiner.enums.OutputFormat;
 import com.freeway.image.combiner.enums.ZoomMode;
@@ -323,6 +324,20 @@ public class ImageCombiner {
         TextElement textElement = new TextElement(text, fontName, fontSize, x, y);
         this.combineElements.add(textElement);
         return textElement;
+    }
+
+    /**
+     * 添加矩形元素
+     * @param x         x坐标
+     * @param y         y坐标
+     * @param width     宽度
+     * @param height    高度
+     * @return
+     */
+    public RectangleElement addRectangleElement(int x, int y, int width, int height) {
+        RectangleElement rectangleElement = new RectangleElement(x, y, width, height);
+        this.combineElements.add(rectangleElement);
+        return rectangleElement;
     }
 
 }

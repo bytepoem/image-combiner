@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * @Author zhaoqing.chen
  * @Date 2020/8/21
- * @Description 图片合并元素
+ * @Description 文本元素
  **/
 
 public class TextElement extends CombineElement<TextElement> {

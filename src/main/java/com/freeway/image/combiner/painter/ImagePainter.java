@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 /**
  * @Author zhaoqing.chen
  * @Date 2020/8/21
- * @Description
+ * @Description 图片绘制器
  */
 public class ImagePainter implements IPainter {
 
@@ -67,9 +67,7 @@ public class ImagePainter implements IPainter {
         }
 
         //设置透明度
-        if (imageElement.getAlpha() != 1.0f) {
-            g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, imageElement.getAlpha()));
-        }
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, imageElement.getAlpha()));
 
         //将元素图绘制到画布
         g.drawImage(image, imageElement.getX(), imageElement.getY(), width, height, null);

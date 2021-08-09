@@ -6,7 +6,7 @@
 
 ## 1.2 ImageCombiner能够做什么?
 
-ImageCombiner是一个专门用于图片合成的工具，没有很复杂的功能，简单实用，从实际业务场景出发，提供简单的接口，几行代码即可实现图片拼合（当然用于合成水印也可以），素材上支持图片和文本两种，支持定位、缩放、旋转、圆角、透明度、颜色、字体、字号、删除线、居中绘制、文本自动换行等特性，足够覆盖图片合成的日常需求。
+ImageCombiner是一个专门用于Java服务端图片合成的工具，没有很复杂的功能，简单实用，从实际业务场景出发，提供简单的接口，几行代码即可实现图片拼合（当然用于合成水印也可以），素材上支持图片和文本两种，支持定位、缩放、旋转、圆角、透明度、颜色、字体、字号、删除线、居中绘制、文本自动换行等特性，足够覆盖图片合成的日常需求。
 
 ## 1.3 先看一下效果
 ![avater](media/sample2.png)
@@ -32,11 +32,11 @@ ImageCombiner使用起来相当简单，主要的类只用一个，new一个Imag
 <dependency>
     <groupId>com.freeway</groupId>
     <artifactId>image-combiner</artifactId>
-    <version>1.1.5</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
-最新版本为<font color=red>1.1.5</font>，目前还没有上传中央仓库（比较麻烦），请先自行deploy到自己的私库
+最新版本为<font color=red>1.2.0</font>，目前还没有上传中央仓库（比较麻烦），请先自行deploy到自己的私库
 
 ## 2.2 最简单的例子
 ```java
@@ -106,6 +106,12 @@ public void demo() throws Exception {
             .setAlpha(.8f);         //透明度（0.0~1.0）
             .setRotate(45);         //旋转（0~360）
             .setBlur(20);           //高斯模糊(1~100)_
+
+    //加入圆角矩形元素，作为二维码的底衬
+    combiner.addRectangleElement(138, 1707, 300, 300)
+            .setColor(Color.WHITE)
+            .setRoundCorner(50)     //该值大于等于宽高时，就是圆形，如设为300
+            .setAlpha(.8f)
 
     //二维码（强制按指定宽度、高度缩放）
     combiner.addImageElement(qrCodeUrl, 138, 1707, 186, 186, ZoomMode.WidthHeight);
@@ -190,7 +196,7 @@ public void dynamicWidthDemoTest() throws Exception {
 ![avater](media/code.png)
 
 ## 2.6 元素支持的特性
-具体`ImageElement`和`TextElement`对象支持的特性如下表：
+具体`ImageElement`、`TextElement`、`RectangleElement`对象支持的特性如下表：
 
 | 元素类型        | 特性    | 相关方法                                 |
 | ---------      | ---------------------- | ----------------------------------------- |
@@ -213,6 +219,12 @@ public void dynamicWidthDemoTest() throws Exception {
 | `TextElement`  | 字号     | `setFont()`                             |
 | `TextElement`  | 删除线   | `setStrikeThrough()`                    |
 | `TextElement`  | 自动换行 | `setAutoBreakLine()`                    |
+| ----------------- |  |  |
+| `RectangleElement`  | 位置     | `setX()`,`setY()`                       |
+| `RectangleElement`  | 居中绘制 | `setCenter()`                           |
+| `RectangleElement` | 圆角     | `setRoundCorner()`                      |
+| `RectangleElement`  | 透明度   | `setAlpha()`                            |
+| `RectangleElement`  | 颜色     | `setColor()`                            |
 
 ## 2.7 后续计划
 作者日常需求中已经够用了，各位小伙伴如果有额外的需求可以考虑再进一步扩充，如增加旋转、毛玻璃、艺术字等特效，欢迎加群交流
@@ -241,6 +253,10 @@ v1.1.4
 
 v1.1.5 
 * 修复设置背景图宽高构造函数的小bug
+
+v1.2.0
+* 修复当前元素透明度设置会影响后续元素的问题
+* 新增RectangleElement类型元素，用于绘制矩形/圆角矩形/圆形等简单元素，作为其他元素的底衬（如示例图片3中的商品区域白底，头像白边，二维码白底等）
 
 # 三. 联系作者
 

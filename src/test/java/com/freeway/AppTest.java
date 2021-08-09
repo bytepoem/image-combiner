@@ -217,4 +217,44 @@ public class AppTest {
         //上传oss
         combiner.save("d://pngTest.png");
     }
+
+    /**
+     * 矩形（圆形）绘制测试
+     *
+     * @throws Exception
+     */
+    @Test
+    public void rectangleTest() throws Exception {
+        //合成器和背景图（整个图片的宽高和相关计算依赖于背景图，所以背景图的大小是个基准）
+        ImageCombiner combiner = new ImageCombiner("https://img.thebeastshop.com/combine_image/funny_topic/resource/bg_3x4.png", OutputFormat.JPG);
+
+        //加图片元素（居中绘制，圆角，半透明）
+        combiner.addImageElement("https://img.thebeastshop.com/image/20201130115835493501.png?x-oss-process=image/resize,m_pad,w_750,h_783/auto-orient,1/quality,q_90/format,jpg", 0, 300)
+                .setCenter(true);
+
+        //加文本元素
+        combiner.addTextElement("周末大放送", 60, 200, 960)
+                .setColor(Color.red)
+                .setAlpha(0.2f);
+
+        //加文本元素
+        combiner.addTextElement("周末大放送", 60, 200, 560)
+                .setColor(Color.red);
+
+        //加入矩形元素
+        combiner.addRectangleElement(200, 500, 300, 300)
+                .setColor(Color.BLUE);
+
+        //加入矩形元素（圆角）
+        combiner.addRectangleElement(200, 500, 300, 300)
+                .setColor(Color.RED)
+                .setRoundCorner(300)        //该值大于等于宽高时，就是圆形
+                .setAlpha(.8f)
+                .setCenter(true);
+
+        //合成图片
+        combiner.combine();
+
+        combiner.save("d://rectangleTest.jpg");
+    }
 }

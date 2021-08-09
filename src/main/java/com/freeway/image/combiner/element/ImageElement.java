@@ -11,7 +11,7 @@ import java.net.URL;
 /**
  * @Author zhaoqing.chen
  * @Date 2020/8/21
- * @Description 图片合并元素
+ * @Description 图片元素
  */
 public class ImageElement extends CombineElement<ImageElement> {
 
@@ -19,7 +19,7 @@ public class ImageElement extends CombineElement<ImageElement> {
     private String imgUrl;                  //图片地址
     private Integer width;                  //绘制宽度
     private Integer height;                 //绘制高度
-    private Integer roundCorner;            //圆角度数
+    private Integer roundCorner;            //圆角大小
     private ZoomMode zoomMode;              //缩放模式
     private Integer rotate;                 //旋转角度
     private Integer blur;                   //高斯模糊（毛玻璃）

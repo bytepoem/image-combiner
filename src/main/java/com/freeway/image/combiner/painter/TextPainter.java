@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @Author zhaoqing.chen
  * @Date 2020/8/21
- * @Description
+ * @Description 文本绘制器
  */
 public class TextPainter implements IPainter {
 
@@ -54,9 +54,7 @@ public class TextPainter implements IPainter {
             }
 
             //设置透明度
-            if (textLineElement.getAlpha() != 1.0f) {
-                g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, textLineElement.getAlpha()));
-            }
+            g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, textLineElement.getAlpha()));
 
             //带删除线样式的文字要特殊处理
             if (textLineElement.isStrikeThrough() == true) {
