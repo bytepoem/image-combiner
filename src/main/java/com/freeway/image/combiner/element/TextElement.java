@@ -16,6 +16,7 @@ public class TextElement extends CombineElement<TextElement> {
     private boolean strikeThrough;      //删除线
     private Color color = new Color(0, 0, 0);   //颜色，默认黑色
     private Integer rotate;             //旋转
+    private Integer alignment;          //对齐方式，设置绝对居中后失效
 
     //换行计算相关属性
     private boolean autoBreakLine = false;  //是否自动换行
@@ -140,5 +141,13 @@ public class TextElement extends CombineElement<TextElement> {
 
     public int getLineHeight() {
         return lineHeight;
+    }
+
+    public Integer getAlignment() {
+        return alignment;
+    }
+
+    public void setAlignment(Integer alignment) {
+        this.alignment = alignment;
     }
 }

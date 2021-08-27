@@ -2,6 +2,7 @@ package com.freeway.image.combiner.painter;
 
 import com.freeway.image.combiner.element.CombineElement;
 import com.freeway.image.combiner.element.TextElement;
+import com.freeway.image.combiner.enums.AlignmentMode;
 import sun.font.FontDesignMetrics;
 
 import java.awt.*;
@@ -38,6 +39,22 @@ public class TextPainter implements IPainter {
             g.setFont(textLineElement.getFont());
             g.setColor(textLineElement.getColor());
 
+            //设置对齐方式
+            AlignmentMode alignment = AlignmentMode.forNumber(textLineElement.getAlignment());
+            if (alignment != null) {
+                textWidth = this.getFrontWidth(textLineElement.getText(), textLineElement.getFont());
+                switch (alignment) {
+                    case CENTER:
+                        textLineElement.setX(textLineElement.getX() - (textWidth / 2));
+                        break;
+                    case RIGHT:
+                        textLineElement.setX(textLineElement.getX() - textWidth);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             //设置居中
             if (textLineElement.isCenter()) {
                 textWidth = this.getFrontWidth(textLineElement.getText(), textLineElement.getFont());
@@ -50,7 +67,9 @@ public class TextPainter implements IPainter {
                 if (textWidth == 0) {
                     textWidth = this.getFrontWidth(textLineElement.getText(), textLineElement.getFont());
                 }
-                g.rotate(Math.toRadians(textLineElement.getRotate()), textLineElement.getX() + textWidth / 2, textLineElement.getY());
+                g.rotate(Math.toRadians(textLineElement.getRotate()), textLineElement.getX() + textWidth / 2,
+                        textLineElement.getY()
+                );
             }
 
             //设置透明度
@@ -60,7 +79,9 @@ public class TextPainter implements IPainter {
             if (textLineElement.isStrikeThrough() == true) {
                 AttributedString as = new AttributedString(textLineElement.getText());
                 as.addAttribute(TextAttribute.FONT, textLineElement.getFont());
-                as.addAttribute(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON, 0, textLineElement.getText().length());
+                as.addAttribute(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON, 0,
+                        textLineElement.getText().length()
+                );
                 g.drawString(as.getIterator(), textLineElement.getX(), textLineElement.getY());
             } else {
                 g.drawString(textLineElement.getText(), textLineElement.getX(), textLineElement.getY());
@@ -68,7 +89,9 @@ public class TextPainter implements IPainter {
 
             //绘制完后反向旋转，以免影响后续元素
             if (textLineElement.getRotate() != null) {
-                g.rotate(-Math.toRadians(textLineElement.getRotate()), textLineElement.getX() + textWidth / 2, textLineElement.getY());
+                g.rotate(-Math.toRadians(textLineElement.getRotate()), textLineElement.getX() + textWidth / 2,
+                        textLineElement.getY()
+                );
             }
         }
     }
@@ -126,8 +149,10 @@ public class TextPainter implements IPainter {
                 //一个单词就超限，要暴力换行
                 if (wordWidth > maxLineWidth) {
                     //按比例计算要取几个字符（不是特别精准）
-                    int fetch = (int) ((float) (maxLineWidth - originWidth) / (float) wordWidth * word.length());   //本行剩余宽度所占word宽度比例，乘以字符长度（字符不等宽的时候不太准）
-                    strToComputer = strToComputer.substring(0, strToComputer.length() - word.length() + fetch);     //去除最后的word的后半截
+                    int fetch = (int) ((float) (maxLineWidth - originWidth) / (float) wordWidth * word.length());
+                    //本行剩余宽度所占word宽度比例，乘以字符长度（字符不等宽的时候不太准）
+                    strToComputer = strToComputer.substring(0, strToComputer.length() - word.length() + fetch);
+                    //去除最后的word的后半截
                     computedLines.add(strToComputer);                      //加入计算结果列表
                     strToComputer = "";
                     i -= (word.length() - fetch);                          //遍历计数器回退word.length()-fetch个
@@ -154,7 +179,9 @@ public class TextPainter implements IPainter {
 
     public List<TextElement> getBreakLineElements(TextElement textElement) {
         List<TextElement> breakLineElements = new ArrayList<>();
-        List<String> breakLineTexts = computeLines(textElement.getText(), textElement.getFont(), textElement.getMaxLineWidth());
+        List<String> breakLineTexts = computeLines(textElement.getText(), textElement.getFont(),
+                textElement.getMaxLineWidth()
+        );
         int y = textElement.getY();
         for (int i = 0; i < breakLineTexts.size(); i++) {
             if (i < textElement.getMaxLineCount()) {
