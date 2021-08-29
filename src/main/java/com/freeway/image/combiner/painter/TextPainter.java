@@ -196,6 +196,7 @@ public class TextPainter implements IPainter {
                 combineTextLine.setCenter(textElement.isCenter());
                 combineTextLine.setAlpha(textElement.getAlpha());
                 combineTextLine.setRotate(textElement.getRotate());
+                combineTextLine.setAlignment(textElement.getAlignment());
                 breakLineElements.add(combineTextLine);
 
                 //累加高度
