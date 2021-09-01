@@ -1,6 +1,7 @@
 package com.freeway.image.combiner.element;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 
 /**
  * @Author zhaoqing.chen
@@ -64,6 +65,20 @@ public class TextElement extends CombineElement<TextElement> {
         super.setY(y);
     }
 
+    /**
+     * @param text      文本内容
+     * @param fontName  字体名称
+     * @param fontSize  字号
+     * @param fontStyle 字体类型
+     * @param x         x坐标
+     * @param y         y坐标
+     */
+    public TextElement(String text, String fontName, int fontSize, int fontStyle, int x, int y) {
+        this.text = text;
+        this.font = new Font(fontName, fontStyle, fontSize);
+        super.setX(x);
+        super.setY(y);
+    }
 
     public String getText() {
         return text;
