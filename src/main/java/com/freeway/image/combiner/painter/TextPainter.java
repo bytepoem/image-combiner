@@ -124,7 +124,7 @@ public class TextPainter implements IPainter {
                 break;      //防止意外情况进入死循环
             }
             char c = chars[i];          //当前字符
-            if (isChineseChar(c) || c == ' ' || i == (chars.length - 1)) {
+            if (isChineseChar(c) || c == ' ' || i == (chars.length - 1) || c == '、') {
                 word += c;             //如果是中文或空格或最后一个字符，一个中文算一个单词, 其他字符遇到空格认为单词结束
                 hasWord = true;
             } else {
